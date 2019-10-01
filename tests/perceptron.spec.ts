@@ -35,6 +35,16 @@ describe('Perceptrons', () => {
     expect(expectedError).toBeDefined();
   });
 
+  it('can have weights and bias changed after initialization', () => {
+    let mockPerceptron = new Perceptron([1, 1], -1);
+    mockPerceptron.weights = [1, 2, 3];
+    mockPerceptron.bias = -3;
+
+    expect(mockPerceptron.weights).toEqual([1, 2, 3]);
+    expect(mockPerceptron.bias).toEqual(-3);
+    expect(mockPerceptron.size).toEqual(3)
+  });
+
   describe('Vector Processing', () => {
     it('acts like an and-gate when weights are [2, 2] and the bias is -3', () => {
       let mockAndGate = new Perceptron([2, 2], -3);
@@ -45,11 +55,11 @@ describe('Perceptrons', () => {
     });
 
     it('acts like an or-gate when weights are [2, 2] and the bias is -1', () => {
-      let mockAndGate = new Perceptron([2, 2], -1);
+      let mockOrGate = new Perceptron([2, 2], -1);
 
-      expect(mockAndGate.process([0, 0])).toBeLessThan(0.5);
-      expect(mockAndGate.process([0, 1])).toBeGreaterThanOrEqual(0.5);
-      expect(mockAndGate.process([1, 1])).toBeGreaterThanOrEqual(0.5);
+      expect(mockOrGate.process([0, 0])).toBeLessThan(0.5);
+      expect(mockOrGate.process([0, 1])).toBeGreaterThanOrEqual(0.5);
+      expect(mockOrGate.process([1, 1])).toBeGreaterThanOrEqual(0.5);
     });
   });
 });
